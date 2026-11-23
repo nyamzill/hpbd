@@ -313,34 +313,31 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-// ===== КАССЕТЫ И ВИДЕО =====
+// ===== КАССЕТЫ И ВИДЕО (YouTube) =====
 const cassettes = document.querySelectorAll(".cassette");
 const videoModal = document.getElementById("videoModal");
-const modalVideo = document.getElementById("modalVideo");
+const modalVideo = document.getElementById("modalVideo"); // Теперь это iframe
 const closeVideo = document.getElementById("closeVideo");
 
 if (videoModal && modalVideo) {
     cassettes.forEach(cassette => {
         cassette.addEventListener("click", function() {
-            const videoSrc = this.getAttribute("data-video");
-            modalVideo.src = videoSrc;        // ставим нужное видео
-            videoModal.classList.add("active"); // показываем окно
-            modalVideo.play();                // запускаем видео
+            // Получаем код видео (из data-video, например "dQw4w9WgXcQ")
+            const videoCode = this.getAttribute("data-video");
+            
+            // Формируем ссылку для встраивания с автоплеем
+            modalVideo.src = `https://www.youtube.com/embed/${videoCode}?autoplay=1`;
+            
+            videoModal.classList.add("active");
         });
     });
 
-    // Функция закрытия
     function closeModal() {
         videoModal.classList.remove("active");
-        modalVideo.pause();       // ставим на паузу
-        modalVideo.currentTime = 0; // сбрасываем на начало
-        modalVideo.src = "";      // очищаем источник
+        modalVideo.src = ""; // Останавливаем видео, очищая iframe
     }
 
-    // Закрытие по крестику
     closeVideo.addEventListener("click", closeModal);
-
-    // Закрытие по клику на тёмный фон
     videoModal.addEventListener("click", function(e) {
         if (e.target === videoModal) {
             closeModal();
