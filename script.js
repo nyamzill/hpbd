@@ -412,3 +412,37 @@ if (modal && videoPlayer) {
         });
     });
 }
+// ===== КЛИКАБЕЛЬНЫЙ ТЕКСТ ДЛЯ ФОТО =====
+const photoTriggers = document.querySelectorAll(".photo-trigger");
+const photoModal = document.getElementById("photoModal");
+const modalImage = document.getElementById("modalImage");
+const closePhoto = document.getElementById("closePhoto");
+
+if (photoModal && modalImage) {
+    // Открытие фото по клику на текст
+    photoTriggers.forEach(trigger => {
+        trigger.addEventListener("click", function(e) {
+            e.preventDefault();
+            const photoSrc = this.getAttribute("data-photo");
+            modalImage.src = photoSrc;
+            photoModal.classList.add("active");
+        });
+    });
+
+    // Функция закрытия
+    function closePhotoModal() {
+        photoModal.classList.remove("active");
+        // Небольшая задержка, чтобы фото не пропадало резко
+        setTimeout(() => { modalImage.src = ""; }, 300);
+    }
+
+    // Закрытие по крестику
+    closePhoto.addEventListener("click", closePhotoModal);
+
+    // Закрытие по клику на тёмный фон
+    photoModal.addEventListener("click", function(e) {
+        if (e.target === photoModal) {
+            closePhotoModal();
+        }
+    });
+}
