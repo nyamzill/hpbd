@@ -313,32 +313,30 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-// ===== КАССЕТЫ И ВИДЕО (YouTube) =====
+// ===== КАССЕТЫ И ВИДЕО =====
 const cassettes = document.querySelectorAll(".cassette");
 const videoModal = document.getElementById("videoModal");
-const modalVideo = document.getElementById("modalVideo"); // Теперь это iframe
+const modalVideo = document.getElementById("modalVideo");
 const closeVideo = document.getElementById("closeVideo");
 
 if (videoModal && modalVideo) {
     cassettes.forEach(cassette => {
         cassette.addEventListener("click", function() {
-            // Получаем код видео из data-video
-            const videoCode = this.getAttribute("data-video");
-            
-            // Формируем ссылку для встраивания YouTube с автоплеем
-            modalVideo.src = `https://www.youtube.com/embed/${videoCode}?autoplay=1`;
-            
+            const videoSrc = this.getAttribute("data-video");
+            modalVideo.src = videoSrc;
             videoModal.classList.add("active");
+            modalVideo.play();
         });
     });
 
     function closeModal() {
         videoModal.classList.remove("active");
-        modalVideo.src = ""; // Очищаем iframe, чтобы видео остановилось
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+        modalVideo.src = "";
     }
 
     closeVideo.addEventListener("click", closeModal);
-    
     videoModal.addEventListener("click", function(e) {
         if (e.target === videoModal) {
             closeModal();
