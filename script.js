@@ -322,10 +322,10 @@ const closeVideo = document.getElementById("closeVideo");
 if (videoModal && modalVideo) {
     cassettes.forEach(cassette => {
         cassette.addEventListener("click", function() {
-            // Получаем код видео (из data-video, например "dQw4w9WgXcQ")
+            // Получаем код видео из data-video
             const videoCode = this.getAttribute("data-video");
             
-            // Формируем ссылку для встраивания с автоплеем
+            // Формируем ссылку для встраивания YouTube с автоплеем
             modalVideo.src = `https://www.youtube.com/embed/${videoCode}?autoplay=1`;
             
             videoModal.classList.add("active");
@@ -334,10 +334,11 @@ if (videoModal && modalVideo) {
 
     function closeModal() {
         videoModal.classList.remove("active");
-        modalVideo.src = ""; // Останавливаем видео, очищая iframe
+        modalVideo.src = ""; // Очищаем iframe, чтобы видео остановилось
     }
 
     closeVideo.addEventListener("click", closeModal);
+    
     videoModal.addEventListener("click", function(e) {
         if (e.target === videoModal) {
             closeModal();
