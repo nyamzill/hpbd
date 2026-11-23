@@ -386,3 +386,29 @@ if (letterStamp) {
         }
     });
 }
+// ===== КЛИКАБЕЛЬНЫЙ ТЕКСТ ДЛЯ ВИДЕО =====
+const videoTriggers = document.querySelectorAll(".video-trigger");
+const modal = document.getElementById("videoModal");
+const videoPlayer = document.getElementById("modalVideo");
+
+if (modal && videoPlayer) {
+    videoTriggers.forEach(trigger => {
+        trigger.addEventListener("click", function(e) {
+            e.preventDefault(); // Чтобы не было перехода по ссылке
+            const videoSrc = this.getAttribute("data-video");
+            
+            // Проверяем, что элемент — video или iframe
+            if (videoPlayer.tagName === "VIDEO") {
+                videoPlayer.src = videoSrc;
+            } else if (videoPlayer.tagName === "IFRAME") {
+                // Если вдруг YouTube, формируем embed-ссылку
+                videoPlayer.src = `https://www.youtube.com/embed/${videoSrc}?autoplay=1`;
+            }
+            
+            modal.classList.add("active");
+            if (videoPlayer.tagName === "VIDEO") {
+                videoPlayer.play();
+            }
+        });
+    });
+}
