@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Felipa&family=Great+Vibes&family=Momo+Signature&family=Monsieur+La+Doulaise&family=Pacifico&family=Yuyu+Short&display=swap"
+        rel="stylesheet">
+    <title>альбомчик</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- КНОПКИ В УГЛУ -->
+    <div class="corner-nav">
+        <a href="index.html" class="circle-link" title="На главную">←</a>
+    </div>
+
+    <section class="page">
+        <h1 class="page-title">усатый фотоальбом <svg width="1.2em" height="0.6em" viewBox="0 0 64 24"
+                fill="currentColor" style="vertical-align: middle;">
+                <path
+                    d="M32 10c-4-5-11-7-17-3-4 3-6 7-11 6-2 0-4-2-4-4 0 5 4 9 10 9 7 0 13-4 18-4h8c5 0 11 4 18 4 6 0 10-4 10-9 0 2-2 4-4 4-5 1-7-3-11-6-6-4-13-2-17 3z" />
+            </svg>
+        </h1>
+
+        <!-- КНИЖКА -->
+        <div class="book" id="book">
+            <!-- Страница 1 (Обложка) -->
+            <div class="paper" id="p1">
+                <div class="front cover-front">
+                    <img src="img/cover.jpg" alt="Обложка" class="cover-image">
+                    <h2 class="cover-title">а помнишь...</h2>
+                    <p class="cover-subtitle">нажми</p>
+                </div>
+
+                <div class="back">
+                    <img src="img/drphoto1.jpg" alt="Фото 1">
+                    <p class="caption">твой день рождения в 2025</p>
+                </div>
+            </div>
+
+            <!-- Страница 2 -->
+            <div class="paper" id="p2">
+                <div class="front">
+                    <img src="img/drphoto2.jpg" alt="Фото 2">
+                    <p class="caption">твой день рождения в 2024</p>
+                </div>
+                <div class="back">
+                    <img src="img/drphoto3.jpg" alt="Фото 3">
+                    <p class="caption">твой день рождения в 2023</p>
+                </div>
+            </div>
+            <!-- Страница 3 -->
+            <div class="paper" id="p3">
+                <div class="front">
+                    <img src="img/zhdun.jpg" alt="Фото 4">
+                    <p class="caption">ходили на ждун 2 и снимали ремейк сцены с педофилией</p>
+                </div>
+                <div class="back">
+                    <img src="img/valala.jpg" alt="Фото 5">
+                    <p class="caption">потом валялись</p>
+                </div>
+            </div>
+            <div class="paper" id="p4">
+                <div class="front">
+                    <img src="img/pili.jpg" alt="Фото 8">
+                    <p class="caption">на маей кухне пили до 6 утра</p>
+                </div>
+                <div class="back">
+                    <img src="img/lavki.jpg" alt="Фото 9">
+                    <p class="caption">люблю</p>
+                </div>
+            </div>
+            <div class="paper" id="p5">
+                <div class="front">
+                    <img src="img/tikva.jpg" alt="Фото 6">
+                    <p class="caption">тыквы резали</p>
+                </div>
+                <div class="back">
+                    <img src="img/mongol.jpg" alt="Фото 7">
+                    <p class="caption">монгольские вечера и пятка в панине</p>
+                </div>
+            </div>
+
+
+            <!-- Страница 4 -->
+            <div class="paper" id="p6">
+                <div class="front">
+                    <img src="img/arbuz.jpg" alt="Фото 10">
+                    <p class="caption">арбузы все купили</p>
+                </div>
+                <div class="back">
+                    <h2>это лиш очень маленькая часть всего....</h2>
+                </div>
+            </div>
+        </div>
+        <!-- Кнопки управления -->
+        <div class="book-controls">
+            <button id="prevBtn" class="change-photos-btn" disabled>сюда</button>
+            <button id="nextBtn" class="change-photos-btn">туда</button>
+        </div>
+        <!-- ПОЛКА С КАССЕТАМИ -->
+        <h2 class="cassettes-title">усатые видео!!</h2>
+        <p class="cassettes-subtitle">смотреть все до конца они собраны по несколько!!</p>
+        <div class="cassettes-container">
+
+            <!-- Кассета 1 -->
+            <div class="cassette" data-video="video1.mp4">
+                <div class="cassette-window"></div>
+                <div class="cassette-label">№1</div>
+                <div class="cassette-hole left-hole"></div>
+                <div class="cassette-hole right-hole"></div>
+            </div>
+
+            <!-- Кассета 2 -->
+            <div class="cassette" data-video="ma.mp4">
+                <div class="cassette-window"></div>
+                <div class="cassette-label">№2</div>
+                <div class="cassette-hole left-hole"></div>
+                <div class="cassette-hole right-hole"></div>
+            </div>
+
+            <!-- Кассета 3 -->
+            <div class="cassette" data-video="me.mp4">
+                <div class="cassette-window"></div>
+                <div class="cassette-label">№3</div>
+                <div class="cassette-hole left-hole"></div>
+                <div class="cassette-hole right-hole"></div>
+            </div>
+            <!-- Кассета 4 -->
+            <div class="cassette" data-video="usi.mp4">
+                <div class="cassette-window"></div>
+                <div class="cassette-label">№4</div>
+                <div class="cassette-hole left-hole"></div>
+                <div class="cassette-hole right-hole"></div>
+            </div>
+
+        </div>
+
+        <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ВИДЕО (скрыто по умолчанию) -->
+        <div class="video-modal" id="videoModal">
+            <div class="video-modal-content">
+                <span class="close-video" id="closeVideo">&times;</span>
+                <video id="modalVideo" controls></video>
+            </div>
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

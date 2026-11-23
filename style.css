@@ -1,0 +1,1223 @@
+/* ===== ОБЩИЕ НАСТРОЙКИ ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background-image: url("img/background.jpg");  /* путь к фото */
+    background-size: cover;        /* фото заполняет весь экран, не искажаясь */
+    background-position: center;   /* центрируем */
+    background-attachment: fixed;  /* фон не прокручивается вместе со страницей */
+    background-repeat: no-repeat;  /* без повторов */
+    color: #4a2c35;
+    min-height: 100vh;
+}
+
+/* ===== ГЛАВНЫЙ ЭКРАН — без боковых отступов, чтобы гирлянда шла от краёв ===== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;            /* было 40px 20px — убрали бока */
+    position: relative;
+}
+.hero-title {
+    font-family: 'Great Vibes', sans-serif;
+    font-size: 4rem;
+    text-align: center;
+    color: #c2185b;
+    text-shadow: 2px 2px 0 #fff, 4px 4px 8px rgba(194, 24, 91, 0.25);
+    margin-bottom: 60px;
+    transform: translateY(10px);
+}
+
+.hero-subtitle {
+    letter-spacing: 1px;
+    font-family: 'Great Vibes', sans-serif;
+    position: absolute;       /* вынимаем из потока — не влияет на гирлянду */
+    top: 15%;                 /* позиция сверху (подберём под вкус) */
+    left: 50%;                /* центрируем */
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 1.75rem;
+    color: #7a4a5a;           /* мягкий цвет, чтобы не перебивать заголовок */
+    font-style: italic;
+    max-width: 80%;
+    z-index: 5;               /* поверх фона */
+}
+
+/* ===== ФОТО НА ВЕРЁВОЧКЕ-ГИРЛЯНДЕ ===== */
+.photo-garland {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;                  /* чуть больше расстояние между фото */
+    padding-top: 90px;          /* фото начинаются ниже линии верёвки */
+    padding-bottom: 180px;      /* место под провис, чтобы не обрезалось */
+    width: 100%;                /* на всю ширину экрана */
+}
+
+/* Верёвка: провисает вниз, идёт от самого верха */
+.photo-garland::before {
+    content: "";
+    position: absolute;
+    top: -10px;                      /* прижали к верху контейнера */
+    left: 0;
+    right: 0;
+    height: 220px;               /* глубина провиса */
+    border-bottom: 3px solid #b98a5a;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+/* Каждое фото висит на верёвке */
+.photo-item {
+    position: relative;
+    background: #fff;                     /* белая рамка как у полароида */
+    padding: 10px 10px 20px;              /* поля: сверху/сбоку 10, снизу 20 (как у полароида) */
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    transform: rotate(-2deg);             /* лёгкий наклон для живости */
+    transition: transform 0.3s ease;      /* плавность при наведении */
+}
+/* Крайние фото выше, среднее ниже — висят вдоль дуги */
+.photo-item:nth-child(1) {
+    transform: rotate(8deg) translateY(103px);
+}
+.photo-item:nth-child(2) {
+    transform: rotate(0deg) translateY(130px);   /* среднее ниже всех */
+}
+.photo-item:nth-child(3) {
+    transform: rotate(-8deg) translateY(103px);
+}
+
+/* Эффект при наведении — фото чуть выпрямляется и приподнимается */
+.photo-item:hover {
+    transform: rotate(0deg) translateY(-9px) scale(1.03);
+}
+
+/* Прищепка сверху каждого фото */
+.photo-item::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 22px;
+    background: #d4a373;                  /* цвет прищепки */
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Сама картинка */
+.photo-item img {
+    display: block;
+    width: 280px;
+    height: 330px;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
+}
+
+/* ===== КНОПКА СМЕНЫ ФОТО ===== */
+.change-photos-btn {
+    margin-top: 60px;
+    padding: 14px 34px;
+    font-size: 1.1rem;
+    font-family: 'Dancing Script',cursive;
+    color: #fff;
+    background: #c2185b;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(194, 24, 91, 0.4);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.change-photos-btn:hover {
+    background: #a3154d;
+    transform: translateY(-2px);
+}
+
+.change-photos-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== НИЖНИЕ КНОПКИ-ССЫЛКИ ===== */
+.links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px 20px;
+}
+
+.page-link {
+    display: inline-block;
+    padding: 14px 30px;
+    font-size: 1.05rem;
+    font-family: 'Dancing Script',cursive;
+    text-decoration: none;
+    color: #c2185b;
+    background: #fff;
+    border: 2px solid #c2185b;
+    border-radius: 50px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.page-link:hover {
+    background: #c2185b;
+    color: #fff;
+}
+
+/* ===== АДАПТИВ ДЛЯ ТЕЛЕФОНА ===== */
+@media (max-width: 700px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    .photo-garland {
+        gap: 20px;
+    }
+    .photo-item img {
+        width: 110px;
+        height: 140px;
+    }
+    .photo-item {
+        padding: 6px 6px 14px;
+    }
+}
+/* ===== КНОПКА КОНФЕТТИ ===== */
+.confetti-btn {
+    margin-top: 20px;
+    padding: 14px 34px;
+    font-size: 1.1rem;
+    font-family: 'Dancing Script',cursive;
+    color: #fff;
+    background: #f0a500;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(240, 165, 0, 0.45);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.confetti-btn:hover {
+    background: #d68f00;
+    transform: translateY(-2px);
+}
+
+.confetti-btn:active {
+    transform: translateY(0);
+}
+/* ===== ВТОРАЯ И ТРЕТЬЯ СТРАНИЦЫ ===== */
+
+/* Контейнер страницы — по центру, с отступами */
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+/* Заголовок страницы — в стиле главной, но чуть меньше */
+.page-title {
+    font-size: 2.7rem;
+    font-family: 'Great Vibes',sans-serif;
+    color: #c2185b;
+    text-shadow: 2px 2px 0 #fff, 4px 4px 8px rgba(194, 24, 91, 0.25);
+    margin-bottom: 30px;
+}
+
+/* Текст-поздравление */
+.page-text {
+    max-width: 600px;       /* не растягивается на всю ширину — легче читать */
+    font-size: 1.15rem;
+    font-family: 'Dancing Script', cursive;
+    line-height: 1.7;
+    color: #4a2c35;
+    margin-bottom: 50px;
+}
+
+
+/* ===== КОНВЕРТ С ПИСЬМОМ ===== */
+
+/* ===== КОНВЕРТ И ПИСЬМО ===== */
+
+/* Общая обёртка — чтобы конверт и письмо накладывались */
+.mail-wrapper {
+    position: relative;
+    width: 340px;
+    height: 240px;
+    margin: 20px 0 60px;
+    /* Разрешаем содержимому вылезать за границы */
+    overflow: visible;
+}
+/* ===== КОНВЕРТ ===== */
+.envelope {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    perspective: 1000px;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Когда открыт — конверт растворяется и чуть уменьшается */
+.envelope.open {
+    opacity: 0;
+    transform: scale(0.85);
+    pointer-events: none;      /* чтобы нельзя было кликнуть по невидимому конверту */
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #f4d7c1;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+    background: #e8c3a8;
+    border-radius: 8px;
+    clip-path: polygon(0 0, 50% 45%, 100% 0, 100% 100%, 0 100%);
+    z-index: 3;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: #d9ad8a;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform 0.6s ease;
+    z-index: 4;
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.envelope-heart {
+    position: absolute;
+    top: 38%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
+    color: #c2185b;
+    z-index: 5;
+    transition: opacity 0.3s ease;
+}
+
+.envelope.open .envelope-heart {
+    opacity: 0;
+}
+
+/* Базовое состояние (письмо спрятано) */
+.letter {
+    position: absolute;
+    inset: 0;
+    background: #fffdf8;
+    border-radius: 8px;
+    padding: 30px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4a2c35;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    transform: scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.7s ease, opacity 0.6s ease, width 0.3s ease, height 0.3s ease;
+}
+
+/* Открытое состояние (по центру экрана + прокрутка) */
+.letter.open {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-2deg);
+    width: 85vw;
+    max-width: 700px;
+    height: 80vh;
+    max-height: 1800px;
+    opacity: 1;
+    z-index: 50;
+    pointer-events: auto;
+    overflow-y: auto;
+    padding: 40px;
+    font-family: 'Caveat',cursive;
+    font-size: 1.5rem;
+}
+/* На маленьких экранах — конверт чуть меньше */
+@media (max-width: 700px) {
+    .envelope {
+        width: 260px;
+        height: 180px;
+    }
+    .letter {
+        height: 150px;
+        font-size: 0.85rem;
+    }
+    .envelope.open .letter {
+        transform: translateY(-110px);
+    }
+}
+/* ===== КРУГЛЫЕ КНОПКИ В УГЛУ ===== */
+.corner-nav {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;   /* ← вот это выстраивает кнопки в колонку */
+    gap: 12px;
+    z-index: 999;
+}
+
+.circle-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;       /* превращает квадрат в круг */
+    background: #fff;         /* белый фон */
+    color: #c2185b;           /* розовый текст/иконка */
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 2px solid #c2185b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+/* Эффект при наведении */
+.circle-link:hover {
+    background: #c2185b;
+    color: #fff;
+    transform: scale(1.1);
+}
+/* ===== КНИЖКА-АЛЬБОМ ===== */
+
+/* ===== КНИЖКА-АЛЬБОМ (исправленная) ===== */
+
+.book {
+    position: relative;
+    width: 320px;
+    height: 420px;
+    margin: 40px auto;
+    perspective: 2000px;         /* увеличили глубину */
+    transform-style: preserve-3d;
+}
+
+/* Каждый лист бумаги */
+.paper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+    cursor: pointer;
+    /* Задаём 3D-позицию, чтобы страницы не слипались */
+    transform: rotateY(0deg) translateZ(0px);
+ /*   will-change: transform;              /* готовим браузер к анимации заранее */
+ /*   backface-visibility: hidden;         /* прячем изнанку самого листа */
+ /*   -webkit-backface-visibility: hidden; /* для Safari */
+}
+
+
+/* Картинки и подписи */
+.paper img {
+    max-width: 100%;
+    max-height: 80%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-bottom: 15px;
+}
+
+.caption {
+    font-size: 1.1rem;
+    color: #c2185b;
+    font-style: italic;
+}
+
+/* Поворот листа (перелистывание) */
+.paper.turned {
+    transform: rotateY(-180deg);
+}
+/* Раскладываем страницы по слоям: первая — сверху, последняя — снизу */
+#p1 { z-index: 3; }
+#p2 { z-index: 2; }
+#p3 { z-index: 1; }
+
+/* Когда страница перевёрнута, она уходит В САМЫЙ НИЗ (под остальные) */
+.paper.turned {
+    z-index: 0 !important;   /* !important нужен, чтобы перебить #p1, #p2, #p3 */
+}
+
+/* Лицевая и задняя сторона листа */
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: #fffdf8;
+    border-radius: 4px 12px 12px 4px;
+    box-shadow: inset 4px 0 10px rgba(0,0,0,0.05), 2px 4px 10px rgba(0,0,0,0.15); 
+    padding: 25px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* Важно: каждая сторона чуть смещена по Z, чтобы не было мерцания */
+    transform: translateZ(0.1px);
+}
+
+.back {
+    transform: rotateY(180deg) translateZ(0.1px);
+    border-radius: 12px 4px 4px 12px;
+    box-shadow: inset -4px 0 10px rgba(0,0,0,0.05), -2px 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Обложка */
+#p1 .front {
+    background: #c2185b;
+    color: #fff;
+}
+
+/* Картинки и подписи в альбоме */
+.paper img {
+    max-width: 100%;
+    max-height: 80%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-bottom: 15px;
+}
+
+.caption {
+    font-size: 1.25rem;
+    color: #c2185b;
+    font-style: italic;
+    font-family: 'Dancing Script',cursive;
+}
+
+/* Панель с кнопками под книжкой */
+.book-controls {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Неактивная кнопка (когда листать некуда) */
+.book-controls button:disabled {
+    background: #ddd;
+    color: #888;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+/* ===== ОБЛОЖКА АЛЬБОМА ===== */
+.cover-front {
+    background: #fffdf8; /* Светлый фон, чтобы фото выделялось */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+}
+
+/* Сама фотография на обложке */
+.cover-image {
+    width: 260px;         /* Ширина фото */
+    height: 260px;        /* Высота фото */
+    object-fit: cover;    /* Чтобы фото не искажалось, а заполняло квадрат */
+    border-radius: 8px;   /* Скругленные углы */
+    border: 5px solid #fff; /* Белая рамка как у полароида */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Тень */
+    margin-bottom: 20px;  /* Отступ до текста */
+}
+
+/* Текст на обложке */
+.cover-title {
+    font-size: 1.4rem;
+    font-family: 'Dancing Script', cursive;
+    color: #fff7fa;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.cover-subtitle {
+    font-size: 0.9rem;
+    color: #ffffff;
+    font-style: italic;
+    font-family: 'Dancing Script', cursive;
+}
+/* ===== ВОЗДУШНЫЕ ШАРИКИ ===== */
+.balloons {
+    position: absolute;
+    top: 15%;                 /* на какой высоте от верха экрана висят шарики */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;     /* чтобы шарики не мешали кликать по кнопкам/фото */
+    z-index: 1;               /* под текстом, но над фоном */
+}
+
+.balloon {
+    position: absolute;
+    width: 60px;
+    height: 75px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; /* форма шарика */
+    box-shadow: inset -5px -5px 15px rgba(0,0,0,0.2); /* объём */
+    animation: float 4s ease-in-out infinite;         /* лёгкое парение */
+}
+
+/* Ниточка шарика */
+.balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    width: 2px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.3); /* цвет ниточки */
+}
+
+/* Индивидуальные цвета и позиции */
+.balloon-1 {
+    background: #ff7b9c; /* розовый */
+    left: 10%;           /* слева от надписи */
+    top: 0;
+    animation-delay: 0s;
+}
+
+.balloon-2 {
+    background: #f0a500; /* золотой */
+    left: 18%;
+    top: 60px;           /* чуть ниже первого */
+    animation-delay: 1s;
+    width: 50px;         /* разный размер для реалистичности */
+    height: 65px;
+}
+
+.balloon-3 {
+    background: #ba68c8; /* фиолетовый */
+    right: 18%;
+    top: 50px;
+    animation-delay: 0.5s;
+    width: 55px;
+    height: 70px;
+}
+
+.balloon-4 {
+    background: #4fc3f7; /* голубой */
+    right: 10%;
+    top: -10px;
+    animation-delay: 1.5s;
+}
+
+/* Анимация парения */
+@keyframes float {
+    0%   { transform: translateY(0px) rotate(-2deg); }
+    50%  { transform: translateY(-15px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(-2deg); }
+}
+
+/* На телефонах прячем или уменьшаем шарики, чтобы не мешали */
+@media (max-width: 700px) {
+    .balloon {
+        width: 40px;
+        height: 50px;
+    }
+    .balloon::after {
+        height: 30px;
+        bottom: -30px;
+    }
+    .balloon-1 { left: 5%; }
+    .balloon-2 { left: 12%; top: 40px; }
+    .balloon-3 { right: 12%; top: 30px; }
+    .balloon-4 { right: 5%; top: 0px; }
+}
+/* ===== БЛЁСТКИ НА ФОНЕ ===== */
+.sparkles {
+    position: fixed;       /* фиксируем на экране, чтобы не двигались при прокрутке */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;  /* клики проходят сквозь блёстки */
+    z-index: 0;            /* на самом нижнем слое (под контентом) */
+    overflow: hidden;
+}
+
+.sparkle {
+    position: absolute;
+    width: 4px;            /* размер звездочки */
+    height: 4px;
+    background: white;      /* белый цвет */
+    border-radius: 50%;
+    box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.8), 0 0 12px 4px rgba(179, 0, 255, 0.6); /* свечение */
+    opacity: 0;            /* изначально невидимы */
+    animation: twinkle 4s infinite ease-in-out;
+}
+
+/* Анимация мерцания (появление и исчезновение) */
+@keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50%      { opacity: 1; transform: scale(1.2); }
+}
+
+/* Позиции и задержки для каждой блёстки — чтобы они мерцали хаотично */
+.s1  { top: 15%; left: 10%; animation-delay: 0s; }
+.s2  { top: 25%; left: 85%; animation-delay: 0.8s; }
+.s3  { top: 50%; left: 20%; animation-delay: 1.5s; }
+.s4  { top: 70%; left: 75%; animation-delay: 0.3s; }
+.s5  { top: 10%; left: 50%; animation-delay: 2.1s; }
+.s6  { top: 85%; left: 40%; animation-delay: 1.2s; }
+.s7  { top: 40%; left: 95%; animation-delay: 2.8s; }
+.s8  { top: 65%; left: 5%;  animation-delay: 0.6s; }
+.s9  { top: 80%; left: 90%; animation-delay: 1.8s; }
+.s10 { top: 35%; left: 35%; animation-delay: 2.4s; }
+.s11 { top: 12%; left: 70%; animation-delay: 0.4s; }
+.s12 { top: 55%; left: 60%; animation-delay: 1.7s; }
+.s13 { top: 90%; left: 15%; animation-delay: 2.5s; }
+.s14 { top: 5%;  left: 30%; animation-delay: 3.1s; }
+.s15 { top: 45%; left: 80%; animation-delay: 0.9s; }
+/* ===== КУРСОР-СЕРДЕЧКО ===== */
+body {
+    /* Рисуем сердечко через SVG-код прямо в CSS */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23fc65d7" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto;
+}
+/* ===== ЛЕТАЮЩИЕ СЕРДЕЧКИ ===== */
+.flying-hearts {
+    position: fixed;
+    bottom: -50px;           /* начинают свой путь снизу экрана */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.f-heart {
+    position: absolute;
+    bottom: 0;
+    color: #ff7b9c;          /* цвет сердечек */
+    font-size: 24px;
+    opacity: 0;
+    animation: float-up 8s linear infinite;
+}
+
+/* Разные позиции и задержки */
+.h1 { left: 10%; animation-delay: 0s; font-size: 20px; }
+.h2 { left: 30%; animation-delay: 1.5s; font-size: 28px; color: #f58fb8; }
+.h3 { left: 50%; animation-delay: 3s; font-size: 18px; }
+.h4 { left: 70%; animation-delay: 0.5s; font-size: 26px; color: #7fb6f5; }
+.h5 { left: 85%; animation-delay: 2s; font-size: 22px; }
+.h6 { left: 95%; animation-delay: 4.5s; font-size: 30px; color: #e0a1ff; }
+
+/* Поднимаются снизу вверх и исчезают */
+@keyframes float-up {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.8; }        /* быстро проявляются */
+    90%  { opacity: 0.8; }        /* держатся видимыми */
+    100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+}
+
+/* ===== ШЛЕЙФ ЗА КУРСОРОМ ===== */
+.cursor-spark {
+    position: fixed;
+    pointer-events: none;      /* не мешают кликам */
+    z-index: 9999;             /* поверх всего */
+    font-size: 16px;
+    animation: spark-fade 0.8s ease-out forwards;
+}
+
+@keyframes spark-fade {
+    0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.2) translateY(30px); }
+}
+
+/* ===== КАССЕТЫ ===== */
+.cassettes-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: 'Great Vibes',sans-serif;
+    color: #c2185b;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.cassettes-subtitle {
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Dancing Script',cursive;
+    margin-bottom: 45px;
+}
+
+.cassettes-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+/* Корпус кассеты */
+.cassette {
+    position: relative;
+    width: 160px;
+    height: 100px;
+    background: #333;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cassette:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+}
+
+/* Окошко по центру кассеты */
+.cassette-window {
+    width: 100px;
+    height: 45px;
+    background: #555;
+    border-radius: 4px;
+    border: 2px solid #222;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+/* Рисуем «катушки» внутри окошка */
+/* Катушки внутри окошка кассеты */
+.cassette-window::before,
+.cassette-window::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: #111;
+    border-radius: 50%;
+    border: 3px dashed #777;
+    /* Добавляем плавность для вращения */
+    transition: transform 0.5s ease;
+}
+.cassette-window::before { left: 10px; }
+.cassette-window::after { right: 10px; }
+
+/* Вращение при наведении на кассету */
+.cassette:hover .cassette-window::before {
+    animation: spin 1s linear infinite;
+}
+.cassette:hover .cassette-window::after {
+    animation: spin 1s linear infinite reverse; /* Вторая катушка крутится в другую сторону */
+}
+
+/* Сама анимация вращения */
+@keyframes spin {
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Этикетка с названием */
+.cassette-label {
+    color: #fff;
+    font-size: 0.8rem;
+    font-family: inherit;
+    text-align: center;
+    background: #c2185b;
+    width: 80%;
+    padding: 2px 0;
+    border-radius: 2px;
+}
+
+/* Дырочки по бокам */
+.cassette-hole {
+    position: absolute;
+    bottom: 8px;
+    width: 10px;
+    height: 10px;
+    background: #111;
+    border-radius: 50%;
+}
+.left-hole { left: 20px; }
+.right-hole { right: 20px; }
+
+/* ===== МОДАЛЬНОЕ ОКНО С ВИДЕО ===== */
+.video-modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Тёмный фон */
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px); /* Лёгкое размытие фона */
+}
+
+/* Когда активно — показываем */
+.video-modal.active {
+    display: flex;
+}
+
+.video-modal-content {
+    position: relative;
+    width: 85vw;
+    max-width: 900px;
+    background: #000;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.video-modal-content video {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    border-radius: 8px;
+    display: block;
+}
+
+/* Кнопка закрытия (крестик) */
+.close-video {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-video:hover {
+    color: #ff7b9c;
+}
+.book.is-open {
+    transform: scale(1.35);
+    margin-right: 25%;        /* или margin-right, как ты сделала */
+    margin-top: 80px;        /* ← опускаем книжку вниз при открытии */
+    transition: transform 0.8s ease, margin-left 0.8s ease, margin-top 0.8s ease;
+    z-index: 10;
+}
+
+@media (max-width: 700px) {
+    .book.is-open {
+        transform: scale(1.1);
+        margin-top: 40px;    /* на телефоне меньше */
+    }
+}
+/* ===== ПЫШНЫЙ ТОРТ ===== */
+.cake-container {
+    position: relative;
+    width: 320px;
+    height: 340px;
+    margin: 40px auto 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 1;
+}
+
+/* --- Свеча --- */
+/* --- Свеча --- */
+.candle {
+    position: relative;
+    width: 14px;
+    height: 70px; /* Сделали свечу чуть длиннее */
+    background: repeating-linear-gradient(
+        45deg,
+        #ff4081, #ff4081 6px,
+        #fff 6px, #fff 12px
+    );
+    border-radius: 4px;
+    z-index: 10;
+    margin-bottom: -5px; /* Опускаем чуть глубже в торт */
+}
+
+.candle-wick {
+    position: absolute;
+    top: -8px; left: 50%;
+    transform: translateX(-50%);
+    width: 2px; height: 8px;
+    background: #333;
+}
+
+/* --- Огонёк --- */
+.flame {
+    position: absolute;
+    /* ВАЖНО: привязываем огонёк к верхушке свечи */
+    top: 95px; /* Подогнано под новую высоту свечи и торта */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px; height: 35px;
+    background: #ff9800;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    box-shadow: 0 0 15px 5px rgba(255, 152, 0, 0.6), 0 0 30px 10px rgba(255, 235, 59, 0.4);
+    z-index: 11;
+    animation: flicker 0.1s infinite alternate;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.flame::after {
+    content: ""; position: absolute; bottom: 0; left: 50%;
+    transform: translateX(-50%); width: 10px; height: 20px;
+    background: #ffeb3b; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+@keyframes flicker {
+    0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+    100% { transform: translateX(-50%) scale(1.05) rotate(2deg); }
+}
+.cake-container.blown-out .flame {
+    opacity: 0; transform: translateX(-50%) scale(0);
+}
+
+/* --- Ярусы торта --- */
+.cake-tier {
+    position: relative;
+    background: #fffdf8; /* Белый бисквит */
+    border-radius: 50% 50% 0 0 / 20% 20% 0 0; /* Закругленный верх */
+    box-shadow: inset 0 -10px 15px rgba(0,0,0,0.05), 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Верхний ярус */
+.tier-top {
+    width: 200px;
+    height: 70px;
+    background: #fce4ec; /* Нежно-розовый крем */
+    z-index: 3;
+    margin-bottom: -35px; /* Ставим на нижний ярус */
+}
+
+/* Нижний ярус */
+.tier-bottom {
+    width: 280px;
+    height: 90px;
+    background: #f8bbd0; /* Розовый крем */
+    z-index: 1;
+}
+
+/* --- Клубнички на верхнем ярусе --- */
+.strawberry {
+    position: absolute;
+    width: 22px;
+    height: 28px;
+    background: #e53935;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; /* Заострили низ */
+    z-index: 4;
+    box-shadow: inset -3px -3px 5px rgba(0,0,0,0.2);
+}
+
+/* Блик на клубничке, чтобы она стала объемной */
+.strawberry::after {
+    content: "";
+    position: absolute;
+    top: 4px; left: 4px;
+    width: 6px; height: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: rotate(-20deg);
+}
+
+/* Чубчик (зеленые листики) */
+.strawberry::before {
+    content: ""; position: absolute; top: -4px; left: 50%;
+    transform: translateX(-50%); width: 14px; height: 8px;
+    background: #4caf50; border-radius: 50% 50% 0 0;
+    z-index: 2;
+}
+/* Располагаем клубнички */
+.s1 { top: -15px; left: 20px; transform: rotate(-15deg); }
+.s2 { top: -20px; left: 55px; transform: rotate(-5deg); }
+.s3 { top: -22px; left: 90px; transform: rotate(0deg); }
+.s4 { top: -20px; left: 125px; transform: rotate(5deg); }
+.s5 { top: -15px; left: 160px; transform: rotate(15deg); }
+
+/* --- Розочки крема (под клубникой) --- */
+.cream-dollop {
+    position: absolute;
+    width: 26px; height: 26px;
+    background: #f48fb1;
+    border-radius: 50%;
+    z-index: 3;
+    bottom: -10px;
+    box-shadow: inset -2px -2px 5px rgba(0,0,0,0.1);
+}
+.d1 { left: 10px; }
+.d2 { left: 50px; }
+.d3 { left: 90px; }
+.d4 { left: 130px; }
+.d5 { left: 170px; }
+
+/* --- Свисающий крем (драже) на нижнем ярусе --- */
+.drip {
+    position: absolute;
+    width: 20px;
+    height: 30px;
+    background: #f8bbd0; /* Тот же цвет, что и верхний ярус */
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+    top: 0;
+    z-index: 2;
+}
+.drip.d1 { left: 0px; height: 20px; }
+.drip.d2 { left: 40px; height: 35px; }
+.drip.d3 { left: 80px; height: 25px; }
+.drip.d4 { left: 120px; height: 40px; }
+.drip.d5 { left: 160px; height: 30px; }
+.drip.d6 { left: 200px; height: 25px; }
+.drip.d7 { left: 240px; height: 20px; }
+
+/* --- Подставка под торт --- */
+.cake-stand {
+    width: 300px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.6); /* Прозрачное стекло */
+    border-radius: 50%;
+    margin-top: -5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15), inset 0 2px 5px rgba(255,255,255,0.8);
+    z-index: 0;
+}
+
+/* --- Подсказка --- */
+.cake-hint {
+    text-align: center;
+    color: #7a4a5a;
+    font-style: italic;
+    font-family: 'Great Vibes',sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    transition: opacity 0.4s;
+    margin-top: 30px; /* Отступ от подставки */
+}
+/* ===== БОЛЬШОЕ ФОТО ===== */
+.big-photo-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto 60px;
+    border: 8px solid #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transform: rotate(-1deg); /* Легкий наклон для эффекта полароида */
+    transition: transform 0.3s ease, opacity 0.8s ease; /* добавили плавность для opacity */
+    opacity: 1;
+}
+
+/* Скрытое состояние */
+.big-photo-container.hidden-photo {
+    opacity: 0;
+    pointer-events: none; /* чтобы нельзя было навести на невидимое фото */
+    transform: rotate(-1deg) translateY(20px); /* небольшой сдвиг для эффекта */
+}
+
+
+.big-photo-container:hover {
+    transform: rotate(1deg) scale(1.02); /* Оживает при наведении */
+}
+
+.big-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+}
+/* Подпись под фото */
+.photo-caption {
+    text-align: center;
+    font-family: 'Caveat',cursive;       /* Использует твой красивый шрифт */
+    font-size: 1.5rem;
+    color: #000000;             /* Розовый цвет, как у заголовков */
+    margin-top: 15px;           /* Отступ от фото */
+    margin-bottom: 10px;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+/* На телефонах подпись чуть меньше */
+@media (max-width: 700px) {
+    .photo-caption {
+        font-size: 1rem;
+    }
+}
+/* ===== ПЕЧАТЬ НА ПИСЬМЕ ===== */
+.letter-stamp {
+    /* position: absolute;
+    bottom: 20px;
+    right: 20px; */
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px dashed #c2185b; /* Пунктирная рамка */
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transform: rotate(-15deg); /* Наклон, чтобы было похоже на оттиск */
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    z-index: 20;
+    box-shadow: 0 0 0 rgba(194, 24, 91, 0); /* Для анимации свечения */
+}
+
+/* Эффект при наведении — печать подсвечивается и чуть увеличивается */
+.letter-stamp:hover {
+    transform: rotate(0deg) scale(1.1);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 15px rgba(194, 24, 91, 0.4);
+}
+
+/* Внутренний круг с текстом */
+.stamp-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #c2185b;
+    font-size: 0.6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.stamp-heart {
+    font-size: 1rem;
+    margin: 2px 0;
+}
+
+/* На мобильных печать чуть меньше */
+@media (max-width: 700px) {
+    .letter-stamp {
+        width: 60px;
+        height: 60px;
+        bottom: 10px;
+        right: 10px;
+    }
+    .stamp-inner {
+        font-size: 0.5rem;
+    }
+    .stamp-heart {
+        font-size: 0.8rem;
+    }
+}

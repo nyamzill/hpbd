@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Felipa&family=Great+Vibes&family=Momo+Signature&family=Monsieur+La+Doulaise&family=Pacifico&family=Yuyu+Short&display=swap"
+        rel="stylesheet">
+    <title>задуть</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- КНОПКА НА ГЛАВНУЮ -->
+    <div class="corner-nav">
+        <a href="index.html" class="circle-link" title="На главную">←</a>
+    </div>
+
+    <section class="page">
+        <h1 class="page-title">Тебе тортик! Загадывай желание быстрее</h1>
+
+        <!-- ТОРТ -->
+        <div class="cake-container" id="cake">
+            <!-- Огонёк свечи -->
+            <div class="flame" id="flame"></div>
+
+            <!-- Свеча -->
+            <div class="candle">
+                <div class="candle-wick"></div>
+            </div>
+
+            <!-- Верхний ярус торта (основа) -->
+            <div class="cake-tier tier-top">
+                <!-- Клубнички наверху -->
+                <div class="strawberry s1"></div>
+                <div class="strawberry s2"></div>
+                <div class="strawberry s3"></div>
+                <div class="strawberry s4"></div>
+                <div class="strawberry s5"></div>
+
+                <!-- Розочки крема -->
+                <div class="cream-dollop d1"></div>
+                <div class="cream-dollop d2"></div>
+                <div class="cream-dollop d3"></div>
+                <div class="cream-dollop d4"></div>
+                <div class="cream-dollop d5"></div>
+            </div>
+
+            <!-- Нижний ярус торта -->
+            <div class="cake-tier tier-bottom">
+                <!-- Свисающий крем с завитушками -->
+                <div class="drip d1"></div>
+                <div class="drip d2"></div>
+                <div class="drip d3"></div>
+                <div class="drip d4"></div>
+                <div class="drip d5"></div>
+                <div class="drip d6"></div>
+                <div class="drip d7"></div>
+            </div>
+
+            <!-- Подставка для торта -->
+            <div class="cake-stand"></div>
+        </div>
+
+        <p class="cake-hint" id="cakeHint">дуй дуй дуй</p>
+
+        <!-- БОЛЬШОЕ ФОТО СНИЗУ -->
+        <div class="big-photo-container hidden-photo" id="bigPhoto">
+            <img src="img/susi.jpg" alt="С Днём Рождения!" class="big-photo">
+            <p class="photo-caption">чо ты там срала чтоли так долго хаха ладно давай садись уже все принесли</p>
+        </div>
+        
+
+    </section>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
