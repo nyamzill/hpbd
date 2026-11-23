@@ -1239,3 +1239,62 @@ body {
 .video-trigger:hover {
     color: #f0a500;             /* Цвет при наведении (золотой) */
 }
+/* ===== КЛИКАБЕЛЬНЫЙ ТЕКСТ ДЛЯ ФОТО ===== */
+.photo-trigger {
+    color: #f0a500;             /* Золотой цвет, чтобы отличался от видео */
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+.photo-trigger:hover {
+    color: #c2185b;             /* Розовый при наведении */
+}
+
+/* ===== МОДАЛЬНОЕ ОКНО С ФОТО ===== */
+.photo-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Тёмный фон */
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.photo-modal.active {
+    display: flex;
+}
+
+.photo-modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.photo-modal-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 8px solid #fff; /* Белая рамка, как у полароида */
+    display: block;
+}
+
+/* Крестик для закрытия */
+.close-photo {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+}
+
+.close-photo:hover {
+    color: #f0a500;
+}
