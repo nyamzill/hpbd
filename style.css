@@ -1229,3 +1229,13 @@ body {
         font-size: 0.8rem;
     }
 }
+.video-trigger {
+    color: #c2185b;             /* Розовый цвет */
+    font-weight: bold;
+    cursor: pointer;            /* Курсор-рука */
+    text-decoration: underline; /* Подчеркивание */
+    transition: color 0.3s;
+}
+.video-trigger:hover {
+    color: #f0a500;             /* Цвет при наведении (золотой) */
+}
