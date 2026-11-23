@@ -323,24 +323,20 @@ if (videoModal && modalVideo) {
     cassettes.forEach(cassette => {
         cassette.addEventListener("click", function() {
             const videoSrc = this.getAttribute("data-video");
-            modalVideo.src = videoSrc;        // ставим нужное видео
-            videoModal.classList.add("active"); // показываем окно
-            modalVideo.play();                // запускаем видео
+            modalVideo.src = videoSrc;
+            videoModal.classList.add("active");
+            modalVideo.play();
         });
     });
 
-    // Функция закрытия
     function closeModal() {
         videoModal.classList.remove("active");
-        modalVideo.pause();       // ставим на паузу
-        modalVideo.currentTime = 0; // сбрасываем на начало
-        modalVideo.src = "";      // очищаем источник
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+        modalVideo.src = "";
     }
 
-    // Закрытие по крестику
     closeVideo.addEventListener("click", closeModal);
-
-    // Закрытие по клику на тёмный фон
     videoModal.addEventListener("click", function(e) {
         if (e.target === videoModal) {
             closeModal();
